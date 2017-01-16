@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest
-import json as simplejson
 
 from .models import Favorite
 
@@ -35,7 +36,7 @@ def add_or_remove(request):
     }
 
     return HttpResponse(
-        simplejson.dumps(response, ensure_ascii=False),
+        json.dumps(response, ensure_ascii=False),
         mimetype='application/json'
     )
 
@@ -62,6 +63,6 @@ def remove(request):
     }
 
     return HttpResponse(
-        simplejson.dumps(response, ensure_ascii=False),
+        json.dumps(response, ensure_ascii=False),
         content_type='application/json'
     )
