@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(document).ready(function() {
   $('.btn.favorite').click(function() {
       var $obj = $(this);
       var target_id = $obj.attr('id').split('_')[1];
@@ -10,9 +10,9 @@ $(document).ready(function() {
              target_object_id: target_id},
       success: function(response) {
           if (response.status == 'added') {
-            $obj.children().removeClass('icon-heart-empty').addClass('icon-heart');}
+            $obj.children().removeClass('fa-heart-o').addClass('fa-heart');}
           else {
-            $obj.children().removeClass('icon-heart').addClass('icon-heart-empty');
+            $obj.children().removeClass('fa-heart').addClass('fa-heart-o');
           }
           $obj.parent('.favit').children('.fav-count').text(response.fav_count);
           $obj.prop('disabled', false);
