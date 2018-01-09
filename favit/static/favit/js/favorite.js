@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
   $('.btn.favorite').click(function() {
       var $obj = $(this);
       var target_id = $obj.attr('id').split('_')[1];
