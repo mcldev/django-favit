@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
           else {
             $obj.children().removeClass('fa-heart').addClass('fa-heart-o');
           }
-          $obj.parent('.favit').children('.fav-count').text(response.fav_count);
+          //$obj.parent('.favit').children('.fav-count').text(response.fav_count);
           $obj.prop('disabled', false);
       }
       });
