@@ -20,13 +20,13 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 if (response.status == 'added') {
                     $obj.children().removeClass(add_fav_icon).addClass(remove_fav_icon);
-                    if ($obj.attr('title') && $obj.title === add_fav_title) {
+                    if ($obj.attr('title') && $obj.attr('title') === add_fav_title) {
                         $obj.title = remove_fav_title;
                     }
                 }
                 else {
                     $obj.children().removeClass(remove_fav_icon).addClass(add_fav_icon);
-                    if ($obj.attr('title') && $obj.title === remove_fav_title) {
+                    if ($obj.attr('title') && $obj.attr('title') === remove_fav_title) {
                         $obj.title = add_fav_title;
                     }
                 }
