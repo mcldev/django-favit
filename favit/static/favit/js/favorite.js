@@ -4,12 +4,12 @@ jQuery(document).ready(function($) {
       var target_id = $obj.attr('id').split('_')[1];
 
       var add_fav_icon = $obj.attr('data-add-fav-icon');
-      if (typeof add_fav_icon !== typeof undefined && add_fav_icon !== false) {
+      if (typeof add_fav_icon === typeof undefined || add_fav_icon === false) {
           add_fav_icon = "fa-heart-o";
       }
 
       var remove_fav_icon = $obj.attr('data-remove-fav-icon');
-      if (typeof remove_fav_icon !== typeof undefined && remove_fav_icon !== false) {
+      if (typeof remove_fav_icon === typeof undefined || remove_fav_icon === false) {
           remove_fav_icon = "fa-heart";
       }
 
