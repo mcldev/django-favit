@@ -2,21 +2,36 @@ jQuery(document).ready(function($) {
   $('.btn.favorite').click(function() {
       var $obj = $(this);
       var target_id = $obj.attr('id').split('_')[1];
+
+      var add_fav_icon = $obj.attr('data-add-fav-icon');
+      if (typeof add_fav_icon !== typeof undefined && add_fav_icon !== false) {
+          add_fav_icon = "fa-heart-o";
+      }
+
+      var remove_fav_icon = $obj.attr('data-remove-fav-icon');
+      if (typeof remove_fav_icon !== typeof undefined && remove_fav_icon !== false) {
+          remove_fav_icon = "fa-heart";
+      }
+
+
       $obj.prop('disabled', true);
       $.ajax({
-      url: $obj.attr('href'),
-      type: 'POST',
-      data: {target_model: $obj.attr('model'),
-             target_object_id: target_id},
-      success: function(response) {
-          if (response.status == 'added') {
-            $obj.children().removeClass('fa-heart-o').addClass('fa-heart');}
-          else {
-            $obj.children().removeClass('fa-heart').addClass('fa-heart-o');
+          url: $obj.attr('href'),
+          type: 'POST',
+          data: {
+              target_model: $obj.attr('model'),
+              target_object_id: target_id
+          },
+          success: function (response) {
+              if (response.status == 'added') {
+                  $obj.children().removeClass(add_fav_icon).addClass(remove_fav_icon);
+              }
+              else {
+                  $obj.children().removeClass(remove_fav_icon).addClass(add_fav_icon);
+              }
+              //$obj.parent('.favit').children('.fav-count').text(response.fav_count);
+              $obj.prop('disabled', false);
           }
-          //$obj.parent('.favit').children('.fav-count').text(response.fav_count);
-          $obj.prop('disabled', false);
-      }
       });
   });
 
