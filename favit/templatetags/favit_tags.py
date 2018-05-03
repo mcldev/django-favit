@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import template
 from django.template.loader import render_to_string
-
+from classytags.utils import flatten_context
 from ..models import Favorite
 
 
@@ -24,6 +24,7 @@ def favorite_button(context, target):
     if Favorite.objects.get_favorite(user, target):
         undo = True
 
+    context = flatten_context(context)
     context.update({
         'target_model': target_model,
         'target_object_id': target.id,
@@ -47,6 +48,7 @@ def unfave_button(context, target):
 
     target_model = '.'.join((target._meta.app_label, target._meta.object_name))
 
+    context = flatten_context(context)
     context.update({
         'target_model': target_model,
         'target_object_id': target.id,
