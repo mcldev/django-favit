@@ -3,13 +3,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.apps import apps
 from builtins import str
+from builtins import int 
 
 
 def _get_content_type_and_obj(obj, model=None):
     if isinstance(model, str):
         model = apps.get_model(*model.split("."))
 
-    if isinstance(obj, (int, long)):
+    if isinstance(obj, int):
         obj = model.objects.get(pk=obj)
 
     return ContentType.objects.get_for_model(type(obj)), obj
