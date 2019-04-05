@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.contrib.contenttypes import generic
+try:
+    from django.contrib.contenttypes.generic import GenericForeignKey
+except ImportError:
+    from django.contrib.contenttypes.fields import GenericForeignKey
+
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.conf import settings
@@ -15,7 +19,7 @@ class Favorite(models.Model):
     user = models.ForeignKey(getattr(settings, 'AUTH_USER_MODEL', 'auth.User'))
     target_content_type = models.ForeignKey(ContentType)
     target_object_id = models.PositiveIntegerField()
-    target = generic.GenericForeignKey('target_content_type', 'target_object_id')
+    target = GenericForeignKey('target_content_type', 'target_object_id')
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
 
     objects = FavoriteManager()

@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models import get_model
 
+try:
+    from django.db.models import get_model
+except ImportError:
+    from django.apps import apps
+    get_model = apps.get_model
 
 def _get_content_type_and_obj(obj, model=None):
     if isinstance(model, basestring):
