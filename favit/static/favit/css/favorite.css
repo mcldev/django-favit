@@ -1,3 +1,11 @@
+.favit i.fa-heart {
+    color: #CB3D3D;
+}
+
+.favit.fa-heart-o {
+    color: black;
+}
+
 .fav-count {
     font-size: .8em;
     padding: 2px 5px 2px 4px;

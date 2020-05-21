@@ -11,7 +11,7 @@ from .models import Favorite
 def add_or_remove(request):
 
     if not request.is_ajax():
-        return HttpResponseNotAllowed()
+        return HttpResponseNotAllowed([])
 
     user = request.user
 
@@ -37,7 +37,7 @@ def add_or_remove(request):
 
     return HttpResponse(
         json.dumps(response, ensure_ascii=False),
-        mimetype='application/json'
+        content_type='application/json'
     )
 
 
@@ -45,7 +45,7 @@ def add_or_remove(request):
 def remove(request):
 
     if not request.is_ajax():
-        return HttpResponseNotAllowed()
+        return HttpResponseNotAllowed([])
 
     user = request.user
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import template
 from django.template.loader import render_to_string
-
+from classytags.utils import flatten_context
 from ..models import Favorite
 
 
@@ -24,14 +24,15 @@ def favorite_button(context, target):
     if Favorite.objects.get_favorite(user, target):
         undo = True
 
-    return render_to_string(
-        'favit/button.html', {
-            'target_model': target_model,
-            'target_object_id': target.id,
-            'undo': undo,
-            'fav_count': Favorite.objects.for_object(target).count()
-        }
-    )
+    context = flatten_context(context)
+    context.update({
+        'target_model': target_model,
+        'target_object_id': target.id,
+        'undo': undo,
+        'fav_count': Favorite.objects.for_object(target).count()
+    })
+
+    return render_to_string('favit/button.html', context)
 
 
 @register.simple_tag(takes_context=True)
@@ -47,12 +48,12 @@ def unfave_button(context, target):
 
     target_model = '.'.join((target._meta.app_label, target._meta.object_name))
 
-    return render_to_string(
-        'favit/unfave-button.html', {
-            'target_model': target_model,
-            'target_object_id': target.id,
-        }
-    )
+    context = flatten_context(context)
+    context.update({
+        'target_model': target_model,
+        'target_object_id': target.id,
+    })
+    return render_to_string('favit/unfave-button.html', context)
 
 
 @register.filter
