@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 from django import template
 from django.template.loader import render_to_string
 from classytags.utils import flatten_context
@@ -13,7 +13,7 @@ def favorite_button(context, target):
     user = context['request'].user
 
     # do nothing when user isn't authenticated
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return ''
 
     target_model = '.'.join((target._meta.app_label, target._meta.object_name))
@@ -83,7 +83,7 @@ def favorites_count(obj):
     return Favorite.objects.for_object(obj).count()
 
 
-@register.assignment_tag
+@register.simple_tag
 def user_favorites(user, app_model=None):
     """
     Usage:
@@ -108,7 +108,7 @@ def user_favorites(user, app_model=None):
     return Favorite.objects.for_user(user, app_model)
 
 
-@register.assignment_tag
+@register.simple_tag
 def model_favorites(app_model):
     """
     Gets all favorited objects that are instances of a model

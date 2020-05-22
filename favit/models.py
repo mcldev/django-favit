@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 try:
     from django.contrib.contenttypes.generic import GenericForeignKey
 except ImportError:
@@ -16,8 +16,8 @@ class Favorite(models.Model):
     """
     """
 
-    user = models.ForeignKey(getattr(settings, 'AUTH_USER_MODEL', 'auth.User'))
-    target_content_type = models.ForeignKey(ContentType)
+    user = models.ForeignKey(getattr(settings, 'AUTH_USER_MODEL', 'auth.User'), on_delete=models.CASCADE)
+    target_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     target_object_id = models.PositiveIntegerField()
     target = GenericForeignKey('target_content_type', 'target_object_id')
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
