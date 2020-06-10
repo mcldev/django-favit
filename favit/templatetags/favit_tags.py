@@ -40,7 +40,7 @@ def unfave_button(context, target):
     user = context['request'].user
 
     # do nothing when user isn't authenticated
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return ''
 
     if Favorite.objects.get_favorite(user, target) is None:
